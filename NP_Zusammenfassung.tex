@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt]{book}
+\documentclass[a4paper,10pt, oneside]{book}
 
 
 %--- Useages
@@ -11,7 +11,7 @@
 %---- Preamble -----
 \title{NP Zusammenfassung}
 \author{Lukas Schaller}
-\date{15.04.2019}
+\date{\today}
 
 %--- Mathematik -----
 \usepackage{amsmath, amssymb, amstext}
@@ -86,24 +86,16 @@ $Reach(s)$ ist die Menge aller von s erreichbaren Zustände in $TS$
 wobei $Post^0(s) = {s}$ und $Post^{n+1}(s) = Post(Post^n(s), Act)$
 
 \section{Trainingsblatt}
-\paragraph{Vorgänger}
-\begin{flushleft}
- $Pre(s,\alpha) = \{s' \in S | s' \xrightarrow{\alpha} s\}$, 
-\end{flushleft}
-
-\begin{flushright}
- $Pre(s,A) = \bigcup\limits_{\alpha \in A} Pre(s,\alpha)$
-\end{flushright}
-
+\subsubsection{Vorgänger}
+$Pre(s,\alpha) = \{s' \in S | s' \xrightarrow{\alpha} s\}$, 
+\hfill
+$Pre(s,A) = \bigcup\limits_{\alpha \in A} Pre(s,\alpha)$
 
 \begin{flushleft}
- $Pre(C,\alpha) = \bigcup\limits_{s \in C} Pre(s,\alpha)$,
+$Pre(C,\alpha) = \bigcup\limits_{s \in C} Pre(s,\alpha)$,
+\hfill
+$Pre(C,A) = \bigcup\limits_{\alpha \in A} Pre(C,\alpha)$
 \end{flushleft}
-
-\begin{flushright}
- $Pre(C,A) = \bigcup\limits_{\alpha \in A} Pre(C,\alpha)$
-\end{flushright}
-
 
 \paragraph{terminaler Zustand}
 Ein terminaler Zustand ist ein Zustand ohne Nachfolger. Ein Zustand ist genau dann terminal wenn $Act(s) = \emptyset$.
