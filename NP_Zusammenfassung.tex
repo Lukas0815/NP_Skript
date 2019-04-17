@@ -1,0 +1,299 @@
+\documentclass[a4paper,10pt]{book}
+
+
+%--- Useages
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+%---- Format correctly ----
+\usepackage[left=2cm, right=2cm, bottom=3cm, top=2cm]{geometry}
+
+%---- Preamble -----
+\title{NP Zusammenfassung}
+\author{Lukas Schaller}
+\date{15.04.2019}
+
+%--- Mathematik -----
+\usepackage{amsmath, amssymb, amstext}
+\usepackage{dsfont}
+\usepackage{ stmaryrd } % für die Klammern
+
+%--- Pictures ----
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{A1}
+\section{Aktionen}
+\paragraph{Actionen}
+Seien \textit{Kom} eine Menge von Kommunikationsaktionen und \textit{Int} eine davon disjunkte Menge von internen Aktionen. Dann ist
+\begin{equation*}
+ Act = Kom \cup Int
+\end{equation*}
+die Menge aller Aktionen. Dabei gelten folgende Konventionen:
+
+$ \alpha, \beta, \gamma, ... \in Act$ \quad\quad
+$ a,b,c,... \in Int$ \quad\quad
+$ [a],[b],[c],... \in Kom$ \quad\quad
+
+\paragraph{Transitionssystem (LTS)}
+Ein beschritetes Transitionssystem TS ist ein Tripel ($S, \longrightarrow, s_0$), wobei
+\begin{itemize}
+ \item $S$ die Zustandsmenge
+ \item $\longrightarrow \subseteq S \times Act \times S$ die Transitionsrelation,
+ \item $s_0 \in S$ der initiale Zustand ist
+\end{itemize}
+
+
+\paragraph{Nachfolger}
+Sei ein LTS $TS$ = ($S$, $\rightarrow$, $s_0$) gegeben. Sei $s \in S$, $C \subseteq S$, $ \alpha \in Act$, und $A \subseteq Act$.
+
+\begin{flushleft}
+ $Post(s,\alpha) = \{s' \in S | s \xrightarrow{\alpha} s'\}$, 
+\end{flushleft}
+
+\begin{flushright}
+ $Post(s,A) = \bigcup\limits_{\alpha \in A} Post(s,\alpha)$
+\end{flushright}
+
+
+\begin{flushleft}
+ $Post(C,\alpha) = \bigcup\limits_{s \in C} Post(s,\alpha)$,
+\end{flushleft}
+
+\begin{flushright}
+ $Post(C,A) = \bigcup\limits_{\alpha \in A} Post(C,\alpha)$
+\end{flushright}
+
+Aktionen die in Zusand s als nächstes möglich sind:
+\begin{equation*}
+ Act(s) = \{\alpha \in Act \; | \; \exists s': s \xrightarrow{\alpha} s'\}
+\end{equation*}
+Aktionen, die in Zustand s als nächstes beobachtet werden können:
+\begin{equation*}
+ Kom(s) = \{\alpha \in Kom \; | \; \exists s': s \xrightarrow{\alpha} s'\}
+\end{equation*}
+
+
+\paragraph{Erreichbarkeit}
+$Reach(s)$ ist die Menge aller von s erreichbaren Zustände in $TS$
+\begin{equation*}
+ Reach(s) = \bigcup\limits_{n \in \mathds{N}} Post^n(s)
+\end{equation*}
+wobei $Post^0(s) = {s}$ und $Post^{n+1}(s) = Post(Post^n(s), Act)$
+
+\section{Trainingsblatt}
+\paragraph{Vorgänger}
+\begin{flushleft}
+ $Pre(s,\alpha) = \{s' \in S | s' \xrightarrow{\alpha} s\}$, 
+\end{flushleft}
+
+\begin{flushright}
+ $Pre(s,A) = \bigcup\limits_{\alpha \in A} Pre(s,\alpha)$
+\end{flushright}
+
+
+\begin{flushleft}
+ $Pre(C,\alpha) = \bigcup\limits_{s \in C} Pre(s,\alpha)$,
+\end{flushleft}
+
+\begin{flushright}
+ $Pre(C,A) = \bigcup\limits_{\alpha \in A} Pre(C,\alpha)$
+\end{flushright}
+
+
+\paragraph{terminaler Zustand}
+Ein terminaler Zustand ist ein Zustand ohne Nachfolger. Ein Zustand ist genau dann terminal wenn $Act(s) = \emptyset$.
+
+\paragraph{Alphabet des LTS}
+Alphabet eines LTS $TS = \bigcup\limits_{s \in Reach(TS)} Kom(s)$
+
+\section{Nichtdeterminismus}
+\paragraph{Nichtdeterminismus}
+Sei $Post(s) = Post(s, Act)$ und es sei ein LTS $TS = (S, \rightarrow, s_0) $ gegeben. $TS$ ist deterministisch genau dann wenn für alle $s \in S$,
+
+\begin{center}
+$ |Post(s)| \leq 1 $ und $|Act(s)| \leq 1$
+\end{center}
+
+Andernfalls heißt das $TS$ nichtdeterministisch!
+
+\paragraph{Interner und Externer Nichtdeterminismus}
+\begin{flushleft}
+\includegraphics[scale=1]{chart_nichtdeterministisch} 
+\end{flushleft}
+
+\subsection{Annahmen nebenläufiger Prozesse}
+\begin{itemize}
+ \item Zeit wird nur bezüglich relativen Geschwindigkeit der Prozesse untereinander betrachtet, nicht absolut.\\
+ Jeder Prozess kann gerade beliebig schnell oder langsam voranschreiten.
+ \item Aktionen sind unteilbar und zeitlos.
+ \item Nebenläufige Prozesse agieren komplett voneinander unabhängig und unbeeinflusst, es sei denn, sie kommunizieren explizit miteinander.
+\end{itemize}
+
+\section{Labled Transitionsystem}
+\begin{flushleft}
+ \includegraphics{lts.png}
+ \textbf{Hinweis:} Die diagonalen Kanten können wegen der Zeitlosigkeit der Aktionen auch weggelassen werden.
+\end{flushleft}
+
+
+\chapter{B1 - CSS}
+\section{$CSS_0$}
+\subsection{Syntax}
+Gegeben sei die Menge aller Aktionen $Act$. Dann ist die Menge aller Ausdrücke in $CSS_0$ gegeben durch:
+\begin{equation*}
+ P \; ::= \; 0 \; | \; P \: + \: P \; | \; \alpha.P
+\end{equation*}
+wobei $\alpha \in Act$.
+
+\subsubsection{Klammersparregeln}
+\begin{itemize}
+ \item '+' klammert links: $ P + Q + R \rightsquigarrow (P + Q) + R$
+ \item '.' klammert rechts: $ \alpha.\beta.P \rightsquigarrow \alpha.(\beta.P)$
+ \item Punkt vor Strich: $ \alpha.P + Q \rightsquigarrow (\alpha.P) + Q $
+\end{itemize}
+
+\subsection{Semantik}
+Die Semantik einer Sprache beschreibt, welches mathematische Objekt mit einem Ausdruck der Sprache assoziiert werden soll. Die Semantik des Ausdrucks $P$ aus $CCS_0$ ist ein LTS $\llbracket P \rrbracket = (S, \rightarrow, s_0)$.
+\begin{itemize}
+ \item Zustandsmenge S ist die Menge aller $CCS_0$-Ausdrücke
+ \item $s_0 = P$
+ \item $\longrightarrow$ ist eine Teilmenge von $(CSS_0 \times Act \times CCS_0)$
+\end{itemize}
+
+\subsubsection{Inferenzregeln}
+\begin{flushleft}
+Hinweis: $CCS_0$ beinhaltet noch nicht die Inferenzregeln $rec$
+\end{flushleft}
+\begin{center}
+\includegraphics[scale=0.4]{inferenzregeln}
+\end{center}
+
+\subsubsection{Isomorphie}
+Zwei Transitionssysteme $TS = (S,\rightarrow, s_0)$ und $TS' = (S', \rightarrow', s'_0)$ sind isomorph $(TS \sim_{iso} TS')$, wenn es eine Bijektion $f$ gibt mit $f: Reach(TS) \rightarrow Reach(TS)$, so dass $f(s_0) = s'_0$ und für alle $s_1, s_2 \in Reach(TS)$ und alle $\alpha \in Act$ gilt: $s_1 \xrightarrow{\alpha} s_2 $ genau dann wenn $f(s_1) \xrightarrow{\alpha}' f(s_2) $.
+
+\paragraph{Satz}
+Für jedes endliche azyklische LTS $TS$ gibt es einen Ausdruck $P \in CCS_0$, so dass $TS \sim_{iso} \llbracket P \rrbracket$.
+
+\section{$CCS_0^{\omega}$}
+\subsection{Semantik}
+Gegeben sei die Menge aller Aktionen $Act$ und eine Menge von Rekursionsvariablen $Var$. Dann ist die Menge der Ausdrücke in $CCS_0^{\omega}$ wie folgt:\\
+\begin{center}
+$ P \: ::= \: o \: | \: X \: | \: P \: + \: P \: | \: \alpha.P $ , wobei $\alpha \in Act$ und $X \in Var$ 
+\end{center}
+
+\subsubsection{Beispiele}
+$ X := a.b.Y $\\
+$ Y := b.Z + a.Y $\\
+$ Z := a.Y $
+\begin{flushleft}
+Eine Menge solcher Gleichungen definiert offensichtlich eine partielle Funktion: $\Gamma \in Var \rightharpoonup CCS_0^{\omega}$. In diesem Beispiel ergibt sich demnach: $\Gamma = \{(X,a.b.Y),(Y,b.Z + a.Y),(Z,a.Y)\}$
+
+\bigbreak
+
+Es soll gelten:
+\begin{itemize}
+ \item $(\alpha.P,\alpha,P) \in \rightarrow ;$
+ \item $ (P + Q, \alpha, P') \in \rightarrow$ , wann immer $(P,\alpha,P') \in \rightarrow$ ;
+ \item $ (P + Q,\alpha, Q') \in \rightarrow$ , wann immer $\Gamma(x) = P$ und $ (P, \alpha, P') \in \rightarrow$ ;
+ \item nichts sonst ist Element von $\rightarrow_{\Gamma}$
+\end{itemize}
+ 
+\end{flushleft}
+
+\subsection{Geschützte Ausdrücke}
+Eine Variable $X$ ist geschützt in einem Ausdruck $P$, wenn jedes Auftreten von $X$ in $P$ in einem Teilausdruck von $P$ der Form $\alpha.Q$ enthalten ist. Andernfalls heißt $X$ ungeschützt.\\
+Ein Ausdruck $P$ heißt geschützt, wenn alle darin vorgekommenden Variablen in $P$ geschützt sind. Andernfalls heißt $P$ ungeschützt.
+
+\subsubsection{Beispiele}
+
+ ungeschützte Ausdrücke: $X$, $\tau.X + Y$, $(a.X) + X$
+\hfill
+geschützte Ausdrücke: $\alpha.X$, $\tau.(X + Y)$, $\alpha.(X + b.X)$
+
+\section{Sequentielles $CSS_0^{\omega}$}
+Für eine Bindung $\Gamma: Var \rightharpoonup CCS_0^{\omega}$ sei $ \rightarrow_{\Gamma} \subseteq CCS_0^{\Gamma} \times Act \times CCS_0^{\Gamma}$ die kleinste Relation $\longrightarrow$, die den Inferenzregeln genügen.
+
+\subsection{Semantik}
+Sei $LTS_0^{\omega} = \{(CCS_0^{\omega}, T, s) | T \subseteq CCS_0^{\omega} \times Act \times CCS_0^{\omega}, s \in CCS_0^{\omega}\}$. Die Semantik von $CCS_0^{\omega}$ ist eine (kaskadierte) Funktion:\\
+\begin{center}
+ $\llbracket\_\rrbracket \; : \; (Var \rightharpoonup CCS_0^{\omega}) \; \rightarrow \; CCS_0^{\omega} \; \rightarrow \;  LTS_0^{\omega}$\\
+ $\llbracket\_\rrbracket \; \Gamma \; P \; = \; (CCS_0^{\omega}, \rightarrow_{\Gamma}, P)$
+\end{center}
+Wir schreiben $\llbracket P \rrbracket_{\Gamma}$ für $\llbracket \_ \rrbracket \: \Gamma \: P$, oder auch nur $\llbracket P \rrbracket$, sofern $\Gamma$ aus dem Kontext heraus klar ist.
+
+\paragraph{Satz}
+Für jedes endliche LTS $TS$ gibt es einen Ausdruck $P \in CCS_0^{\omega}$ und eine endliche Bindung $\Gamma$, sodass $TS \sim_{iso} \llbracket P \rrbracket_{\Gamma}$
+
+\subsubsection{Zusätzliche Interferenzregeln}
+TODO: Hier Bild von par\_l und par\_r einfügen
+
+\subsection{Synchronisation}
+Synchronisation bietet die Grundlage um unterschiedliche Prozesse auf Aktionen reagieren zu lassen. So kann zum Beispiel die 'light'-Aktion des Feuerzeug-Prozesses in einem Prozess eines Chinaböllers die passive Aktion 'light' hervorrufen.
+In CSS machen wir dazu die Kommunikationsaktionen entweder 'aktiv' oder 'passiv'. Statt einer beliebigen Menge $Kom$ von Markierungen verwenden wir eine Menge, die mehr Struktur aufweist:\\
+$Kom = A^! \bigcup A^?$. Aktionen mit '!' als Output-Aktionen (aktiv) und Aktionen mit '?' als Input-Aktionen interpretiert werden.
+
+
+\paragraph{Komplementarität}
+Input- und Output-Aktionen treten als Paare auf. Das Komplement von $a \in A^! \bigcup A^?$ ist $\bar{a}$. Auch für interne Aktionen $\tau$ gilt $\tau = \bar{\tau}$. Das doppelte Komplement hebt die Wirkung auf: $\alpha \in Act: \bar{\bar{a}} = \alpha$
+
+\paragraph{Hinweis} Interne Aktionen können NICHT synchronisieren.
+
+\subsubsection{Zusätliche Interferenzregel}
+\begin{center}
+\includegraphics[scale=0.3]{sync_regel}
+\end{center}
+
+\subsection{Restriktions-Operator}
+Der Restriktions-Operator '\' unterbindet bestimmte (Paare von) Aktionen eines Prozesses. Intuitiv gesprochen erzwingt er eine Synchronisation.\\
+\textbf{P\textbackslash H} ist ein zweistelliger Operator, mit \textbf{P} als CCS-Ausdruck und \textbf{H} als menge von Kommunikationsaktionen, die unterbunden werden sollen.
+
+\paragraph{Interferenzregel}
+\begin{center}
+ \includegraphics[scale=0.6]{res_regel}
+\end{center}
+
+Annahmen über zulässige Menge H:
+\begin{itemize}
+ \item Die interne Aktion kann nicht unterbunden werden: $\tau \notin H$
+ \item Aktionen treten in H paarweise auf: $a \in H \Longleftrightarrow \bar{a} \in H$
+\end{itemize}
+
+\section{Volle CCS-Power}
+\subsection{Syntax}
+Gegeben sei die Menge aller Kommunikationsaktionen $Kom = A^! \bigcup A^?$, $Act = Kom \bigcup \{ \tau \}$ und eine Menge von Rekursionsvariablen $Var$. Dann ist die Menge aller Ausdrücke in $CCS$ wie folgt gegeben: \\
+\begin{equation*}
+ P \; ::= \; 0 \; | \; X \; | \; P \: + \: P \; | \; \alpha.P \; | \; P|P \; | \; P\backslash H
+\end{equation*}
+wobei $\alpha \in Act, X \in Var$ und $H \subseteq Kom$.
+
+\subsection{Semantik}
+Die Semantik der Ausdrücke con CCS ist gegeben durch:\\
+\begin{center}
+ $\llbracket\_\rrbracket \; : \; (Var \rightharpoonup CCS) \; \rightarrow \; CCS \; \rightarrow \;  LTS^{CCS}$\\
+ $\llbracket\_\rrbracket \; \Gamma \; P \; = \; (CCS, \rightarrow_{\Gamma}, P)$
+\end{center}
+wobei $LTS^{CCS} = \{(CCS, T, s) | T \subseteq CCS \times Act \times CCS, s \in CCS\}$ uns $\rightarrow_{\tau}$ die kleinste Relation $\rightarrow$ ist, die den folgenden Regeln genügt.
+
+\paragraph{Inferenzregeln}
+\begin{center}
+ \includegraphics[scale=0.6]{inferenz_ges}
+\end{center}
+
+\subsection{Regulärer Ausdruck}
+Ein CCS-Asdruck wird regulär genannt, wenn er durch folgende Grammatik gebildet werden kann:
+\begin{center}
+ $ P \ ::= \  0 \ | \ X \ | \ P+P \ | \ \alpha.P \ | \ R$\\
+ $ R \ ::= \ 0 \ | \ R+R \ |\  \alpha.R  \ | \ R|R \ | \ R\backslash H $
+\end{center}
+
+\paragraph{Satz}
+Sofern $\Gamma$ eine endliche Bindung ist bei der alle rechten Seiten regulär sind, ist $Reach(\llbracket P \llbracket_{\Gamma})$ für jedes $P \subset CCS$ endlich.
+
+
+\end{document}
+
