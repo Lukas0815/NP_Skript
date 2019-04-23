@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  17 APR 2019 15:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  23 APR 2019 09:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -513,7 +513,7 @@ LaTeX Font Info:    ... okay on input line 25.
 * paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: twoside 
+* modes: 
 * h-part:(L,W,R)=(56.9055pt, 483.69687pt, 56.9055pt)
 * v-part:(T,H,B)=(56.9055pt, 702.78308pt, 85.35826pt)
 * \paperwidth=597.50787pt
@@ -527,7 +527,7 @@ LaTeX Font Info:    ... okay on input line 25.
 * \headsep=18.06749pt
 * \topskip=10.0pt
 * \footskip=25.29494pt
-* \marginparwidth=115.0pt
+* \marginparwidth=61.0pt
 * \marginparsep=7.0pt
 * \columnsep=10.0pt
 * \skip\footins=9.0pt plus 4.0pt minus 2.0pt
@@ -535,8 +535,8 @@ LaTeX Font Info:    ... okay on input line 25.
 * \voffset=0.0pt
 * \mag=1000
 * \@twocolumnfalse
-* \@twosidetrue
-* \@mparswitchtrue
+* \@twosidefalse
+* \@mparswitchfalse
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
@@ -620,14 +620,11 @@ LaTeX Font Info:    Try loading font information for U+stmry on input line 26.
 (/usr/share/texlive/texmf-dist/tex/latex/stmaryrd/Ustmry.fd) [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
-
-] (./NP_Zusammenfassung.toc)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./NP_Zusammenfassung.toc)
 \tf@toc=\write3
 \openout3 = `NP_Zusammenfassung.toc'.
 
- [3]
-[4
+ [1
 
 ]
 Chapter 1.
@@ -641,98 +638,101 @@ LaTeX Font Info:    Try loading font information for U+dsrom on input line 84.
 
 (/usr/share/texlive/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
-) [5]
-<./images/chart_nichtdeterministisch.png, id=32, 414.79968pt x 262.73157pt>
+) [2
+
+]
+<./images/chart_nichtdeterministisch.png, id=25, 414.79968pt x 262.73157pt>
 File: ./images/chart_nichtdeterministisch.png Graphic file (type png)
 <use ./images/chart_nichtdeterministisch.png>
 Package pdftex.def Info: ./images/chart_nichtdeterministisch.png  used on input
- line 126.
+ line 118.
 (pdftex.def)             Requested size: 414.79868pt x 262.73091pt.
-<./images/lts.png, id=33, 458.46281pt x 280.79906pt>
+<./images/lts.png, id=26, 458.46281pt x 280.79906pt>
 File: ./images/lts.png Graphic file (type png)
 <use ./images/lts.png>
-Package pdftex.def Info: ./images/lts.png  used on input line 139.
+Package pdftex.def Info: ./images/lts.png  used on input line 131.
 (pdftex.def)             Requested size: 458.46169pt x 280.79837pt.
- [6 <./images/chart_nichtdeterministisch.png (PNG copy)>] [7 <./images/lts.png 
-(PNG copy)>] [8
-
-]
+ [3 <./images/chart_nichtdeterministisch.png (PNG copy)>] [4 <./images/lts.png 
+(PNG copy)>]
 Chapter 2.
-<./images/inferenzregeln.png, id=44, 686.565pt x 170.13562pt>
+<./images/inferenzregeln.png, id=34, 686.565pt x 170.13562pt>
 File: ./images/inferenzregeln.png Graphic file (type png)
 <use ./images/inferenzregeln.png>
-Package pdftex.def Info: ./images/inferenzregeln.png  used on input line 173.
+Package pdftex.def Info: ./images/inferenzregeln.png  used on input line 165.
 (pdftex.def)             Requested size: 274.62112pt x 68.05302pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--185
+Underfull \hbox (badness 10000) in paragraph at lines 176--177
 
  []
 
-[9 <./images/inferenzregeln.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 222--223
+[5
+
+ <./images/inferenzregeln.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 215--216
 
  []
 
-[10]
-<./images/sync_regel.png, id=54, 579.66562pt x 140.77594pt>
+[6]
+<./images/sync_regel.png, id=45, 579.66562pt x 140.77594pt>
 File: ./images/sync_regel.png Graphic file (type png)
 <use ./images/sync_regel.png>
-Package pdftex.def Info: ./images/sync_regel.png  used on input line 248.
+Package pdftex.def Info: ./images/sync_regel.png  used on input line 241.
 (pdftex.def)             Requested size: 173.90102pt x 42.2331pt.
 LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 253.
-<./images/res_regel.png, id=55, 247.67531pt x 75.28125pt>
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 246.
+<./images/res_regel.png, id=46, 247.67531pt x 75.28125pt>
 File: ./images/res_regel.png Graphic file (type png)
 <use ./images/res_regel.png>
-Package pdftex.def Info: ./images/res_regel.png  used on input line 257.
+Package pdftex.def Info: ./images/res_regel.png  used on input line 250.
 (pdftex.def)             Requested size: 148.60632pt x 45.16908pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--262
+
+ []
+
 
 Underfull \hbox (badness 10000) in paragraph at lines 268--269
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 275--276
-
- []
-
-<./images/inferenz_ges.png, id=56, 716.6775pt x 103.13531pt>
+[7 <./images/sync_regel.png (PNG copy)> <./images/res_regel.png (PNG copy)>]
+<./images/inferenz_ges.png, id=51, 716.6775pt x 103.13531pt>
 File: ./images/inferenz_ges.png Graphic file (type png)
 <use ./images/inferenz_ges.png>
-Package pdftex.def Info: ./images/inferenz_ges.png  used on input line 284.
+Package pdftex.def Info: ./images/inferenz_ges.png  used on input line 277.
 (pdftex.def)             Requested size: 430.00983pt x 61.88165pt.
-[11 <./images/sync_regel.png (PNG copy)> <./images/res_regel.png (PNG copy)>]
-[12 <./images/inferenz_ges.png (PNG copy)>] (./NP_Zusammenfassung.aux) ) 
+
+[8 <./images/inferenz_ges.png (PNG copy)>] (./NP_Zusammenfassung.aux) ) 
 Here is how much of TeX's memory you used:
- 3903 strings out of 492982
- 51122 string characters out of 6134896
- 126278 words of memory out of 5000000
- 7357 multiletter control sequences out of 15000+600000
+ 3905 strings out of 492982
+ 51142 string characters out of 6134896
+ 126236 words of memory out of 5000000
+ 7358 multiletter control sequences out of 15000+600000
  16728 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,12n,26p,416b,239s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/doublestroke/dsrom8.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/stmaryrd/stmary10.pfb>
-Output written on NP_Zusammenfassung.pdf (12 pages, 433070 bytes).
+ 41i,12n,26p,416b,236s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/doublestroke/dsrom8.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/stmaryrd/stmary10.pfb>
+Output written on NP_Zusammenfassung.pdf (9 pages, 430583 bytes).
 PDF statistics:
- 121 PDF objects out of 1000 (max. 8388607)
- 82 compressed objects within 1 object stream
+ 112 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
