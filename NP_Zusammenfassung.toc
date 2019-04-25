@@ -30,13 +30,13 @@
 \contentsline {section}{\numberline {2.3}Sequentielles $CSS_0^{\omega }$}{6}
 \contentsline {subsection}{\numberline {2.3.1}Semantik}{6}
 \contentsline {paragraph}{Satz}{6}
-\contentsline {subsubsection}{Zus\IeC {\"a}tzliche Interferenzregeln}{7}
+\contentsline {subsubsection}{Zus\IeC {\"a}tzliche Inferenzregeln}{7}
 \contentsline {subsection}{\numberline {2.3.2}Synchronisation}{7}
 \contentsline {paragraph}{Komplementarit\IeC {\"a}t}{7}
 \contentsline {paragraph}{Hinweis}{7}
-\contentsline {subsubsection}{Zus\IeC {\"a}tliche Interferenzregel}{7}
+\contentsline {subsubsection}{Zus\IeC {\"a}tliche Inferenzregel}{7}
 \contentsline {subsection}{\numberline {2.3.3}Restriktions-Operator}{7}
-\contentsline {paragraph}{Interferenzregel}{7}
+\contentsline {paragraph}{Inferenzregel}{7}
 \contentsline {section}{\numberline {2.4}Volle CCS-Power}{7}
 \contentsline {subsection}{\numberline {2.4.1}Syntax}{7}
 \contentsline {subsection}{\numberline {2.4.2}Semantik}{8}

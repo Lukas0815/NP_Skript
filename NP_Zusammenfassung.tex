@@ -222,7 +222,7 @@ Wir schreiben $\llbracket P \rrbracket_{\Gamma}$ für $\llbracket \_ \rrbracket 
 \paragraph{Satz}
 Für jedes endliche LTS $TS$ gibt es einen Ausdruck $P \in CCS_0^{\omega}$ und eine endliche Bindung $\Gamma$, sodass $TS \sim_{iso} \llbracket P \rrbracket_{\Gamma}$
 
-\subsubsection{Zusätzliche Interferenzregeln}
+\subsubsection{Zusätzliche Inferenzregeln}
 TODO: Hier Bild von par\_l und par\_r einfügen
 
 \subsection{Synchronisation}
@@ -236,7 +236,7 @@ Input- und Output-Aktionen treten als Paare auf. Das Komplement von $a \in A^! \
 
 \paragraph{Hinweis} Interne Aktionen können NICHT synchronisieren.
 
-\subsubsection{Zusätliche Interferenzregel}
+\subsubsection{Zusätliche Inferenzregel}
 \begin{center}
 \includegraphics[scale=0.3]{sync_regel}
 \end{center}
@@ -245,7 +245,7 @@ Input- und Output-Aktionen treten als Paare auf. Das Komplement von $a \in A^! \
 Der Restriktions-Operator '\' unterbindet bestimmte (Paare von) Aktionen eines Prozesses. Intuitiv gesprochen erzwingt er eine Synchronisation.\\
 \textbf{P\textbackslash H} ist ein zweistelliger Operator, mit \textbf{P} als CCS-Ausdruck und \textbf{H} als menge von Kommunikationsaktionen, die unterbunden werden sollen.
 
-\paragraph{Interferenzregel}
+\paragraph{Inferenzregel}
 \begin{center}
  \includegraphics[scale=0.6]{res_regel}
 \end{center}
