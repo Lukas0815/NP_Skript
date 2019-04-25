@@ -166,7 +166,10 @@ Hinweis: $CCS_0$ beinhaltet noch nicht die Inferenzregeln $rec$
 \end{center}
 
 \subsubsection{Isomorphie}
-Zwei Transitionssysteme $TS = (S,\rightarrow, s_0)$ und $TS' = (S', \rightarrow', s'_0)$ sind isomorph $(TS \sim_{iso} TS')$, wenn es eine Bijektion $f$ gibt mit $f: Reach(TS) \rightarrow Reach(TS)$, so dass $f(s_0) = s'_0$ und für alle $s_1, s_2 \in Reach(TS)$ und alle $\alpha \in Act$ gilt: $s_1 \xrightarrow{\alpha} s_2 $ genau dann wenn $f(s_1) \xrightarrow{\alpha}' f(s_2) $.
+Zwei Transitionssysteme $TS = (S,\rightarrow, s_0)$ und $TS' = (S', \rightarrow', s'_0)$ sind isomorph $(TS \sim_{iso} TS')$, wenn es eine Bijektion $f$ gibt mit $f: Reach(TS) \rightarrow Reach(TS)$, so dass $f(s_0) = s'_0$ und für alle $s_1, s_2 \in Reach(TS)$ und alle $\alpha \in Act$ gilt: $s_1 \xrightarrow{\alpha} s_2 $ genau dann wenn $f(s_1) \xrightarrow{\alpha}' f(s_2) $.\\
+\begin{flushleft}
+\underline{Intuition}: Zwei LTS sind isomorph solange sie sich ausschließlich im Namen der Zustände unterscheiden. Die Transitionen müssen gleich bleiben!
+\end{flushleft}
 
 \paragraph{Satz}
 Für jedes endliche azyklische LTS $TS$ gibt es einen Ausdruck $P \in CCS_0$, so dass $TS \sim_{iso} \llbracket P \rrbracket$.
@@ -286,6 +289,43 @@ Ein CCS-Asdruck wird regulär genannt, wenn er durch folgende Grammatik gebildet
 
 \paragraph{Satz}
 Sofern $\Gamma$ eine endliche Bindung ist bei der alle rechten Seiten regulär sind, ist $Reach(\llbracket P \llbracket_{\Gamma})$ für jedes $P \subset CCS$ endlich.
+
+\chapter{C1}
+Dieses Kapitel befasst sich mit der beobachtbarem Verhalten von Prozessen. Die Kommunikationsaktionen und die Spuren (mögliche Aktionsfolgen) lassen sich beobachten. Die internen Aktionen und die durchlaufenden Zustände lassen sich offensichtlich nicht beobachten!
+
+\subsubsection*{Definition: Spuren}
+Sei $TS = (S,\rightarrow,s_0)$ ein LTS. Dann definieren wir die Funktion LTS $\rightarrow 2^{Act^*}$ als 
+\begin{equation*}
+Traces(TS) := \{\alpha_1\alpha_2...\alpha_n \in Act^* | n \geq 0 \exists s_1, ... , s_n : \forall 0 < i \leq n : s_{i-1} \xrightarrow{\alpha_i} s_i\}
+\end{equation*}
+als die Menge der endlichen Spuren von $TS$. Wir schreiben $s_0 \rightsquigarrow^{\varrho} s'$
+
+\subsubsection*{Definition: Kongruenzrelation}
+Eine Äquivalenzrelation $\approx$ auf $CCS$ ist eine Kongruenzrelation, wenn für alle CCS-Ausdrücke $P, Q$ und alle Kontexte $C[.]$, $P \approx Q$ impliziert, dass $C[P] \approx C[Q]$ gilt.
+
+\begin{center}
+\includegraphics[scale=0.6]{kongruenzrelation}
+\end{center}
+
+\underline{Algebraische Gesetze}:\\
+\begin{center}
+\begin{tabular}{ c r }
+ $P + Q \sim_{tr} Q + P$ & Kommutativität von +\\
+ $(P + Q) + R \sim_{tr} P + (Q + R)$ & Assozitivität von +\\
+ $P + 0 \sim_{tr} P$ & 0 als neutrales Element von +\\
+\end{tabular}
+\end{center}
+
+\subsubsection{Spuräquivalenz}
+Sei $\Gamma$ : $Var \rightharpoonup CCS, P, Q, R \in CCS$ und $H \subseteq Kom$ sowie $\alpha \in Act$. Wenn $P \sim_{tr} Q$, dann auch:
+\begin{center}
+\begin{tabular}{c c c}
+$P + R \sim_{tr} Q + R$ & \quad\quad $R + P \sim_{tr} R + Q$ & \quad\quad $P | Q \sim_{tr} Q | R$\\
+$R | P \sim_{tr} R | Q$ & $\alpha.P \sim_{tr} \alpha.Q$ & $P\backslash H \sim_{tr} Q\backslash H$
+\end{tabular}
+\end{center}
+
+
 
 
 \end{document}
