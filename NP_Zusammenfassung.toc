@@ -45,3 +45,8 @@
 \contentsline {paragraph}{Satz}{8}
 \contentsline {chapter}{\numberline {3}C1}{9}
 \contentsline {subsubsection}{Spur\IeC {\"a}quivalenz}{9}
+\contentsline {section}{\numberline {3.1}Verklemmung}{9}
+\contentsline {paragraph}{Terminierende Spuren}{10}
+\contentsline {section}{\numberline {3.2}Gleichheit}{10}
+\contentsline {section}{\numberline {3.3}Bisimilarit\IeC {\"a}t}{10}
+\contentsline {section}{\numberline {3.4}Minimale Repr\IeC {\"a}sentanten eines LTS}{11}

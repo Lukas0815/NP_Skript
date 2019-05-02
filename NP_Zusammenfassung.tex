@@ -5,6 +5,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 
+% --- color text
+\usepackage{color}
+
 %---- Format correctly ----
 \usepackage[left=2cm, right=2cm, bottom=3cm, top=2cm]{geometry}
 
@@ -325,7 +328,70 @@ $R | P \sim_{tr} R | Q$ & $\alpha.P \sim_{tr} \alpha.Q$ & $P\backslash H \sim_{t
 \end{tabular}
 \end{center}
 
+\section{Verklemmung}
+Ein Zustand $s$ ist terminal, falls $Post(s, Act) = \emptyset$. Wir schreiben dann $s \nrightarrow$. Falls $P$ in $\llbracket P \rrbracket_{\Gamma}$ terminal ist, nennen wir $P$ einen verklemmten Prozess.
 
+\paragraph{Terminierende Spuren}
+Die \textcolor{blue}{terminierenden Spuren} eines Prozesses $P$ sind alle Spuren, die einem terminalen Zusand enden.
+
+ $TTraces(P) = TTraces(\llbracket P \rrbracket_{\Gamma})$\\
+ $TTraces(\llbracket P \rrbracket) := \{\varrho \in Traces(\llbracket P \rrbracket_{\Gamma}) | \exists P':P \rightsquigarrow^{\varrho} P' \wedge P' \nrightarrow\}$
+\\
+
+Beispiele:
+\begin{itemize}
+ \item Traces(a!.b!.0 + a!.0) $=$ \textbraceleft $\epsilon$,a!,a! b!\textbraceright
+ \item Traces(a!.b!.0) $=$ \textbraceleft $\epsilon$,a!,a! b!\textbraceright
+ \item TTraces(a!.b!.0 + a!.0) = \textbraceleft a!,a! b!\textbraceright
+ \item TTraces(a!.b!.0) = \textbraceleft a! b!\textbraceright
+\end{itemize}
+
+\section{Gleichheit}
+Die 'Super'-Gleichheit...
+\begin{itemize}
+ \item ist eine Äquivalenzrelation
+ \item ist eine Kongruenzrelation
+ \item erhält Spuren
+ \item ist verklemmungssensitiv (erhält terminierende Spuren)
+ \item ist grob genug (gröber als $\sim_{iso}$)
+\end{itemize}
+
+\section{Bisimilarität}
+Zwei Prozesse sind äquivalent, wenn sie zustandsweise gleich sind. 'Gleiche' Zustände erlauben Tranisitionen mit den gleichen Aktionen, die wieder in 'gleichen' Zuständen landen.\\
+\\
+Eine Relation $R \subseteq S \times S$ über den Zuständen eines LTS $TS = (S,\rightarrow,s_0)$ ist eine Bisimulation, wenn für alle $P,Q \in S$ mit $(P,Q) \in R$ und für alle $\alpha \in Act$ gilt:
+
+\begin{itemize}
+ \item Für jedes $P' \in S$ mit $P \xrightarrow{\alpha} P'$ gilt: Es gibt ein $Q' \in S$ mit $Q \xrightarrow{\alpha} Q'$ und $(P',Q') \in R$.
+ \item Für jedes $Q' \in S$ mit $Q \xrightarrow{\alpha} Q'$ gilt: Es gibt ein $P' \in S$ mit $P' \xrightarrow{\alpha} P'$ und $(P', Q') \in R$.
+\end{itemize}
+Zwei Zustände heißen bisimilar wenn es eine Bisimulation $R$ gibt mit $(P,Q) \in R$.
+
+\begin{center}
+$ \sim $ \quad := \quad $\bigcup_{R ist eine Bisimulation} R$\\
+$ (P,Q) \: \in \: \sim \quad \Leftrightarrow \quad \exists$ Bisimulation $R : (P,Q) \in R \Leftrightarrow P$ und $Q$ sind bisimilar
+\end{center}
+$\sim$ ist die Relation aller zueinander bisimilaren Zustände. Sie heißt \textbf{Bisimilarität}. Gleichzeitig ist $\sim$ eine Bisimulation, und zwar die größtmögliche.
+
+\subsection*{Algebra der Bisimilarität}
+Zwei Prozesse $P,Q \in CCS_0$ sind genau dann bisimilar $(P \sim Q)$, wenn sie sich durch Anwenden der folgenden Axiome syntaktisch ineinander umgeformt werden können:
+\begin{itemize}
+ \item $P + Q \sim Q + P$
+ \item $(P + Q) + R \sim P + (Q + R)$
+ \item $(P + 0 \sim P$
+ \item $P + P \sim P$
+\end{itemize}
+
+\section{Minimale Repräsentanten eines LTS}
+Hier wird das \textit{kleinste} LTS, das bisimilar zu dem gegebenen LTS ist, gesucht. Der gefundene Repräsentant ist bis auf Isomorphie eindeutig!
+
+\subsubsection*{Algorithmus}
+\begin{enumerate}
+ \item Gehe davon aus, dass alle Zustände gleich (im Sinne von Bisimilarität) sind
+ \item Suche solange Argumente, warum Zustände noch verschieden sind, bis die Zustände in ihre Äquivalenzklassen getrennt sind
+ \item Fasse Zustände einer Äquivalenzklasse Zusammenfassung
+ \item Lösche doppelte Transitionen
+\end{enumerate}
 
 
 \end{document}
