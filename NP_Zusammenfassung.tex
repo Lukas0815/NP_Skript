@@ -4,6 +4,7 @@
 %--- Useages
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage{textcomp}
 
 % --- color text
 \usepackage{color}
@@ -470,6 +471,41 @@ und $X \in Var$, $H \subseteq Kom$, $a \in \mathds{K} \cup D$, $e \in AExp, b \i
 \includegraphics[scale=0.7]{CCSvpz}
 \end{center}
 
+\subsection{Ersetzung formell}
+\begin{tabular}{l c l}
+ $0\{v/x\}$ & = & 0\\
+ $(P + Q) \{v/x\}$ & = & $P\{v/x\} + Q\{v/x\}$\\
+ $(P | Q) \{v/x\}$ & = & $P\{v/x\} \; | \; Q\{v/x\}$\\
+ $(\alpha.P) \{v/x\}$ & = & $P\{v/x\} \backslash \{\alpha \{v/x\} \; | \; \alpha \in H\}$\\
+ $a?$ oder $a! \{v/x\}$ & = & $a?$ oder $a!$, falls $ a \neq x$\\
+ & & $v?$ oder $v!$, falls $a = x$\\
+ $\tau \{v/x\}$ & = & $\tau$\\
+ $(a?y.P) \{v/x\}$ & = & $a? \{x/v\}y.P\{v/x\}$, falls $x \neq y$\\ 
+ & & $a? \{x/v\}y.P$, falls $x = y$\\ 
+ $(a!y.P) \{v/x\}$ & = & $a! \{x/v\}y.P\{v/x\}$, falls $x \neq y$\\ 
+ & & $a! \{x/v\}y.P$, falls $x = y$\\ 
+ $X[y_1,...] \{x/v\}$ & = & $X[y_1,...]$, falls $x \neq y$\\
+ & & $X[v,...]$, sonst
+\end{tabular}
+
+
+
+\section{Nützliches und Vorgehensweisen}
+
+\subsubsection*{Relationen im Überblick}
+\begin{center}
+\begin{tabular}{|l | c c c c c|}
+\hline
+ & Id(CCS) & $\sim_{iso}$ & $\sim$ & $\sim_{tr}$ & Univ(CCS)\\
+ \hline
+ Äquivalenzrelation & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark\\
+ Kongruenzrelation & \checkmark & \texttimes & \checkmark & \checkmark & \checkmark \\
+ erhält Spuren & \checkmark & \checkmark & \checkmark & \checkmark & \texttimes \\
+ verklemmungssensitiv & \checkmark & \checkmark & \checkmark & \texttimes & \texttimes \\
+ grob genug & \texttimes & \texttimes & \checkmark & \checkmark & \checkmark \\
+ \hline
+\end{tabular}
+\end{center}
 
 \end{document}
 
