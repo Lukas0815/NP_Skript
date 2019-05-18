@@ -356,10 +356,10 @@ Die 'Super'-Gleichheit...
  \item ist grob genug (gröber als $\sim_{iso}$)
 \end{itemize}
 
-\section{Bisimilarität}
+\section{(Starke) Bisimilarität}
 Zwei Prozesse sind äquivalent, wenn sie zustandsweise gleich sind. 'Gleiche' Zustände erlauben Tranisitionen mit den gleichen Aktionen, die wieder in 'gleichen' Zuständen landen.\\
 \\
-Eine Relation $R \subseteq S \times S$ über den Zuständen eines LTS $TS = (S,\rightarrow,s_0)$ ist eine Bisimulation, wenn für alle $P,Q \in S$ mit $(P,Q) \in R$ und für alle $\alpha \in Act$ gilt:
+Eine Relation $R \subseteq S \times S$ über den Zuständen eines LTS $TS = (S,\rightarrow,s_0)$ ist eine (starke) Bisimulation, wenn für alle $P,Q \in S$ mit $(P,Q) \in R$ und für alle $\alpha \in Act$ gilt:
 
 \begin{itemize}
  \item Für jedes $P' \in S$ mit $P \xrightarrow{\alpha} P'$ gilt: Es gibt ein $Q' \in S$ mit $Q \xrightarrow{\alpha} Q'$ und $(P',Q') \in R$.
@@ -392,6 +392,83 @@ Hier wird das \textit{kleinste} LTS, das bisimilar zu dem gegebenen LTS ist, ges
  \item Fasse Zustände einer Äquivalenzklasse Zusammenfassung
  \item Lösche doppelte Transitionen
 \end{enumerate}
+
+\chapter*{Kapitel D}
+\section{Definitionen}
+\subsubsection{Spur : $P \overset{\sigma}{\rightsquigarrow} Q$}
+Für $\sigma = \alpha_1 ... \alpha_n \in Act*$ schreiben wir $P \overset{\sigma}{\rightsquigarrow} Q$, falls $\sigma = \varepsilon$ und $P = Q$ oder es einen Zustand $s_0, ... , s_n$ gibt, mit $s_{i-1} \xrightarrow{\alpha_i} s_i$ für i = 1,...,n und $P = s_0$ und $Q = s_n$
+
+\subsubsection*{Schwache Bisimulation $s \approx t$}
+\begin{itemize}
+ \item wenn $s \overset{\alpha}{\Rightarrow} s'$, dann gibt es eine Transition $t \overset{\alpha}{\Rightarrow} t'$, so dass s' $R$ t'
+ \item wenn $t \overset{\alpha}{\Rightarrow} t'$, dann gibt es eine Transition $s \overset{\alpha}{\Rightarrow} s'$, so dass s' $R$ t'
+\end{itemize}
+
+\subsubsection*{Auswahl-Kongruenz: $\approx^+$}
+Zwei Ausdrücke $P,Q \in CCS_0$ heißen genau dann Auswahl-Kongruent, gschrieben $P \approx^+ Q$, wenn für alle $R \in CCS_0$ gilt:
+\begin{center}
+ $P + R \approx Q + R$
+\end{center}
+
+\subsubsection*{Beobachtungskongruenz: $\overset{\sim}{=}$}
+\begin{itemize}
+ \item wenn $P \xrightarrow{\alpha} P'$, dann $\exists (n,m) \in \mathds{N}^2: Q \overset{\tau^n \alpha \tau^m}{\rightsquigarrow} Q' \wedge P' \approx Q'$
+ \item wenn $Q \xrightarrow{\alpha} Q'$, dann $\exists (n,m) \in \mathds{N}^2: P \overset{\tau^n \alpha \tau^m}{\rightsquigarrow} P' \wedge P' \approx Q'$
+\end{itemize}
+
+Es gilt außerdem: $P \overset{\sim}{=} Q \: \Leftrightarrow \: P =^+ Q$
+
+\subsubsection*{Schwache Transition: $\Longrightarrow$}
+Sei ein LTS $TS = (S,\rightarrow,s_0)$ gegeben. Wir definieren die Transitionsrelation $\Longrightarrow \subset S \times Act \times S$ wie folgt:
+\begin{itemize}
+ \item $s \overset{\tau}{\Longrightarrow} s': \Leftrightarrow \exists n \geq 0: s \overset{\tau^n}{\rightsquigarrow} s'$
+ \item $s \overset{a}{\Longrightarrow} s': \Leftrightarrow \exists s'',s''' \in S: s \overset{\tau}{\Rightarrow} s'' \xrightarrow{a} s''' \overset{\tau}{\Rightarrow} s'$
+\end{itemize}
+mit $a \in Kom$. Beachte dass auch $s'' = s$ und $s''' = s'$ möglich ist.
+
+
+\subsubsection*{Weak Traces: $\sim_{wtr}$}
+$WTraces(P) = \{a_1 a_2 ... a_n | \tau^* a_1 \tau^* a_2 \tau^* ... \tau^* a_n \tau^* \in Traces(P)\}$
+
+
+\subsubsection{Schwache Spuräquivalenz: $P \sim_{wtr} Q$}
+P und Q sind schwach Spuräquivalent $P \sim_{wtr} Q$, genau dann wenn $WTraces(\llbracket P \rrbracket_{\Gamma}) = WTraces(\llbracket Q \rrbracket_{\Gamma})$ gilt 
+
+\section{$CCS_{vp}$}
+\subsection*{Syntax}
+Die Menge aller Ausdrücke in $CCS_{vp}^{\mathds{Z}}$ ist durch die folgende Grammatik gegeben:
+\begin{center}
+ $P ::= 0 \quad | \quad X[u_1,...,u_n] \quad | \quad P + P \quad | \quad \alpha.P \quad | \quad P | P \quad | \quad P\backslash H \quad | \quad when(b) P$,
+\end{center}
+wobei
+\begin{center}
+ $\alpha ::= \quad \tau \quad | \quad a! \quad | \quad a? \quad | \quad a!v \quad | \quad a?v \quad | \quad a!x \quad | \quad a?x$
+\end{center}
+und $a \in \mathds{K}$, $X \in Var$, $H \subseteq Kom$, $v \in \mathds{V}$, $x \in D$ sowie $r_i \in D \cup \mathds{V} \cup \mathds{K}$.
+
+\subsection*{Semantik}
+Die Regeln aus CCS werden um folgende Regeln erweitert bzw prefix wird abgeändert:
+\begin{center}
+ \includegraphics[scale=0.08]{CCSvp}
+\end{center}
+
+
+\section{$CCS_{vp}^{\mathds{Z}}$}
+\subsection*{Syntax}
+Die Menge aller Ausdrücke in $CCS_{vp}^{\mathds{Z}}$ ist durch die folgende Grammatik gegeben:
+\begin{center}
+ $P ::= 0 \quad | \quad X[u_1,...,u_n] \quad | \quad P + P \quad | \quad \alpha.P \quad | \quad P | P \quad | \quad P\backslash H \quad | \quad when(b) P$,
+\end{center}
+wobei
+\begin{center}
+ $\alpha ::= \quad \tau \quad | \quad a! \quad | \quad a? \quad | \quad a!e \quad | \quad a?x$
+\end{center}
+und $X \in Var$, $H \subseteq Kom$, $a \in \mathds{K} \cup D$, $e \in AExp, b \in BExp$, $x \in D$ sowie $u_i \in AExp \cup \mathds{K}$.
+
+\subsection*{Semantik von $CCS_{vp}^{\mathds{Z}}$}
+\begin{center}
+\includegraphics[scale=0.7]{CCSvpz}
+\end{center}
 
 
 \end{document}
