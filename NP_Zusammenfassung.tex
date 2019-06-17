@@ -511,5 +511,23 @@ und $X \in Var$, $H \subseteq Kom$, $a \in \mathds{K} \cup D$, $e \in AExp, b \i
 \end{tabular}
 \end{center}
 
+\chapter{G: Weil Praxis was für Loser ist}
+Ihr wollt Praxis? Hier noch ein paar Definitionen für euch, anstatt darüber zu diskutieren wann es sinnvoll ist sein Programm nebenläufig zu gestalten und welche Vorteile es wirklich bringen könnte. Mit anderen Worten: Warum machen wir das hier eigentlich? Keine Ahnung, hier die Definitionen...
+
+\paragraph{Sequentielle Konsistenz}
+Eine mit einem Programm kompatible Ausführung $(J,P,w)$ ist \textit{sequentiell konsistent} wenn es eine totale Ordung $\leq$ auf $J$ gibt, so dass:
+\begin{itemize}
+ \item $P \subseteq \leq$
+ \item für alle $x?v \in J$ gilt:
+ \begin{itemize}
+  \item $w(x?v) \leq x?v$
+  \item es gibt kein $x!v' \not= w(x?v)$ so dass $w(x?v) \leq x!v' \leq x?v$
+ \end{itemize}
+\end{itemize}
+
+\paragraph{Schwache Konsistenz}
+Eine mit einem anderen Programm kompatible Ausführung $(J,P,w)$ ist schwach konsistent, wenn es eine 
+
+
 \end{document}
 
