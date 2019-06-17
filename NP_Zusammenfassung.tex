@@ -527,7 +527,43 @@ Eine mit einem Programm kompatible Ausführung $(J,P,w)$ ist \textit{sequentiell
 
 \paragraph{Schwache Konsistenz}
 Eine mit einem anderen Programm kompatible Ausführung $(J,P,w)$ ist schwach konsistent, wenn es eine 
+eine partielle Ordnung $\leq$ auf $J$ gibt, so dass:
+\begin{itemize}
+	\item $P \subseteq \leq$
+	\item für alle $x?v \in J$ gilt:
+	\begin{itemize}
+		\item $\neg(w(x?v) \geq x?v)$
+		\item es gibt kein $x!v' \not= w(x?v)$ so dass $w(x?v) \leq x!v' \leq x?v$
+	\end{itemize}
+\end{itemize}
 
+\paragraph{Schwache Konsistenz mit Fences}
+Eine mit einem Programm mit fence-Anweisung kompatible Ausführung $(J,P,w)$ ist schwach konsistent wenn es eine partielle Ordnung $\leq$ auf $J$ gibt, so dass:
+\begin{itemize}
+	\item $P \subseteq \leq$
+	\item für alle $x?v \in J$ gilt:
+	\begin{itemize}
+		\item $\neg(w(x?v) \geq x?v)$
+		\item es gibt kein $x!v' \not= w(x?v)$ so dass $w(x?v) \leq x!v' \leq x?v$
+	\end{itemize}
+	\item für alle fence-Operationen und alle Lese-Operationen $x?v \in J$ gilt: $w(x?v) \geq fence \Rightarrow x?v \geq fence$
+\end{itemize}
+
+\paragraph{Happens-Before-Konsistenz}
+Eine mit einem Programm mit Locks kompatible Ausführung $(J,P,w)$ ist happens-before-konsistent wenn es eine partielle Ordnung $\geq$ auf $J$ gibt, so dass:
+\begin{itemize}
+	\item $P \subseteq \leq$
+	\item für alle $x?v \in J$ gilt:
+	\begin{itemize}
+		\item $\neg(w(x?v) \geq x?v)$
+		\item es gibt kein $x!v' \not= w(x?v)$ so dass $w(x?v) \leq x!v' \leq x?v$
+	\end{itemize}
+	\item für zwei verschiedene Lock-Unlock-Paare $lock(l)_1, unlock(1)_1$ und $lock(l)_2, unlock(l)_2$ gilt entweder
+	\begin{itemize}
+		\item $unlock(l)_1 \leq lock(l)_2$ oder
+		\item $unlock(l)_2 \leq lock(l)_1$
+	\end{itemize}
+\end{itemize}
 
 \end{document}
 

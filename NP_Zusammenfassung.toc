@@ -57,3 +57,8 @@
 \contentsline {section}{\numberline {3.7}$CCS_{vp}^{\mathds {Z}}$}{13}
 \contentsline {subsection}{\numberline {3.7.1}Ersetzung formell}{14}
 \contentsline {section}{\numberline {3.8}N\IeC {\"u}tzliches und Vorgehensweisen}{14}
+\contentsline {chapter}{\numberline {4}G: Weil Praxis was f\IeC {\"u}r Loser ist}{15}
+\contentsline {paragraph}{Sequentielle Konsistenz}{15}
+\contentsline {paragraph}{Schwache Konsistenz}{15}
+\contentsline {paragraph}{Schwache Konsistenz mit Fences}{15}
+\contentsline {paragraph}{Happens-Before-Konsistenz}{15}
