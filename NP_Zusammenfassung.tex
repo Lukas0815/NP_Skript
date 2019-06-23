@@ -25,6 +25,7 @@
 %--- Pictures ----
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
+\usepackage{caption}
 
 \begin{document}
 \maketitle
@@ -514,6 +515,45 @@ und $X \in Var$, $H \subseteq Kom$, $a \in \mathds{K} \cup D$, $e \in AExp, b \i
 \chapter{G: Weil Praxis was für Loser ist}
 Ihr wollt Praxis? Hier noch ein paar Definitionen für euch, anstatt darüber zu diskutieren wann es sinnvoll ist sein Programm nebenläufig zu gestalten und welche Vorteile es wirklich bringen könnte. Mit anderen Worten: Warum machen wir das hier eigentlich? Keine Ahnung, hier die Definitionen...
 
+\section{Kompatibilität und Programmausführung}
+Folgendes Beispiel zeigt einen Programm-Code und dessen Ausführungsdiagramm. Für jedes Programm gibt es genau einen Thread, das heißt einen Strang im Diagramm. Im Ausführungsdiagramm befinden sich lediglich Lese- und Schreiboperationen wieder, wobei $x?v$ eine Leseoperation ist und der Wert $v$ in die globale Variable $x$ eingelesen wird. $x!v$ ist eine Schreiboperation, bei der $v$ in die Variable $x$ geschrieben wird. Es gibt eine Programmordnung - hier mit \textcolor{blue}{blauen} Pfeilen dargestellt - die angibt, welche Ausdrücke vor anderen Ausdrücken ausgeführt werden müssen. Die \textcolor{red}{roten} Pfeile geben die \textit{writeSeen} Funktion an, die für einen Leseoperation angibt, woher der gelesene Wert stammt, also wo er geschrieben wurde. Wichtig: Beide Funktionen unterliegen nicht zwingend einer logischen, zeitlichen Ordnung die der Programm-Code vermuten lässt!
+
+\begin{figure}[htb]
+	
+	\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\includegraphics[scale=0.3]{KompCode}
+		\caption{Code}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\includegraphics[scale=0.3]{KompDia}
+		\caption{Diagramm}
+		\end{minipage}
+\end{figure}
+
+\section{Sequentielle Konsistenz}
+In diesem Modell nimmt man an, dass jeder Thread für sich sequentiell ausgeführt wird. Leseoperationen beziehen sich hier also implizit auf Schreiboperationen in der Vergangenheit. Die einzelnen Schritte zwischen den Threads kann man jedoch beliebig mischen. Das heißt also, dass alle Ausdrücke eines Programms in der "richtigen" Reihenfolge ausgeführt werden (so wie im Programm notiert von oben nach unten), aber der Thread nach jedem Schritt zu einem anderen Thread wechseln kann und dort weiter macht. Es ist die klassische Vorstellung, dass einfach jeder Thread irgendwann seine Prozessorzeit bekommt um weiter ausgeführt zu werden während die anderen warten... (auch wenn das so nicht ganz stimmt)
+\pagebreak
+
+\begin{figure}[htb]
+	
+	\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\includegraphics[scale=0.3]{KompCode}
+		\caption{Code}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\includegraphics[scale=0.3]{seqDia}
+		\caption{Diagramm}
+	\end{minipage}
+\end{figure}
+
+Die hellblauen Pfeile ergeben mit den blauen Pfeilen der Programmordnung nun eine totale Ordnung der Operationen...
+
 \paragraph{Sequentielle Konsistenz}
 Eine mit einem Programm kompatible Ausführung $(J,P,w)$ ist \textit{sequentiell konsistent} wenn es eine totale Ordung $\leq$ auf $J$ gibt, so dass:
 \begin{itemize}
@@ -524,6 +564,24 @@ Eine mit einem Programm kompatible Ausführung $(J,P,w)$ ist \textit{sequentiell
   \item es gibt kein $x!v' \not= w(x?v)$ so dass $w(x?v) \leq x!v' \leq x?v$
  \end{itemize}
 \end{itemize}
+
+\section{Schwache Konsistenz}
+Hier wird es unintuitiv. Mit schwacher Konsistenz müssen Leseoperationen sich nun nicht mehr auf eine Schreiboperation in der Vergangenheit beziehen. Diese Schreiboperation darf sich jedoch nicht in der Zukunft befinden! Mit anderen Worten: Man darf nicht aus der Zukunft lesen aber beliebig aus der Vergangenheit. Das ermöglicht z.B. das Lesen längst veralteter Werte. Die totale Ordnung der Operationen wird somit partiell und entspricht noch den einzelnen Programmabläufen (Ein Statement kommt immernoch vor dem darunter stehendem Statement im Programm). Das Ergebnis des Programms lässt sich allerdings daran nicht mehr eindeutig erklären.
+
+\begin{figure}[htb]
+	
+	\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\includegraphics[scale=0.3]{KompCode}
+		\caption{Code}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\includegraphics[scale=0.3]{schwachDia}
+		\caption{Diagramm}
+	\end{minipage}
+\end{figure}
 
 \paragraph{Schwache Konsistenz}
 Eine mit einem anderen Programm kompatible Ausführung $(J,P,w)$ ist schwach konsistent, wenn es eine 
@@ -537,6 +595,24 @@ eine partielle Ordnung $\leq$ auf $J$ gibt, so dass:
 	\end{itemize}
 \end{itemize}
 
+\section{Schwache Konsistenz mit Fences}
+Fences sind ein Low-Level-Konzept um Probleme mit veralteten Daten in Caches besser in den Griff zu bekommen. Werte, die nach einem Fence geschrieben werden können nicht vor dem Fence gelesen werden. Ein Fence könnte man sich vorstellen wie eine Zeitmauer, welche die Zeitmaschine der Lesezugriffe nicht durchdringen kann und sie davon abhält Werte hinter ihr zu lesen. (Der Begriff Fence, also "Zaun" ist da vielleicht ein wenig untertrieben. Zeitmauern hören sich wesentlich besser an... Wo bleibt hier sonst die Epik?) Wenn ein Wert nach einer Fence-Anweisung geschrieben wird, sehen wir alles, was davor geschrieben wurde. Dieser Satz im Skript möchte sagen, dass ab diesem Zeipunkt die aktuellen Werte wirklich gelten. Sagen wir eine Variable x wird zuerst auf 69, dann auf 1337 gesetzt. Ohne Fence könnte man in einer folgenden Leseoperation immernoch die 69 aus x lesen. Setzt man aber nach dem Schreiben von 1337 ein Fence gilt jetzt unbedingt x=1337, da die 69 nicht mehr gesehen werden kann. (Daher vielleicht der "Zaun" und keine Mauer, da man durch den Zaun die letzte Zuweisung sieht, nicht jedoch Zuweisungen noch weiter dahinter...) 
+
+\begin{figure}[htb]
+	
+	\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\includegraphics[scale=0.3]{fenceCode}
+		\caption{Code}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\includegraphics[scale=0.3]{fenceDia}
+		\caption{Diagramm}
+	\end{minipage}
+\end{figure}
+
 \paragraph{Schwache Konsistenz mit Fences}
 Eine mit einem Programm mit fence-Anweisung kompatible Ausführung $(J,P,w)$ ist schwach konsistent wenn es eine partielle Ordnung $\leq$ auf $J$ gibt, so dass:
 \begin{itemize}
@@ -548,6 +624,13 @@ Eine mit einem Programm mit fence-Anweisung kompatible Ausführung $(J,P,w)$ ist
 	\end{itemize}
 	\item für alle fence-Operationen und alle Lese-Operationen $x?v \in J$ gilt: $w(x?v) \geq fence \Rightarrow x?v \geq fence$
 \end{itemize}
+
+\section{Happens-Before-Konsistenz}
+Der Begriff "Schwache Konsistenz mit Locks" beschreibt diese Konsistenz in unserem Fall vielleicht besser. Eine Ordnung wird zwischen den Ausführungen der kritischen Abschnitte festgelegt um sicherzustellen, dass jeder Thread in einem Solchen eine aktuelle Sicht auf den Speicher hat. Es ergeben sich also mit der \textcolor{blue}{partiellen Ordnung} und den locks nur noch folgende \textcolor{red}{writeSeen}-Möglichkeiten.
+
+\begin{center}
+\includegraphics[scale=0.4]{happensBeforeDia}
+\end{center}
 
 \paragraph{Happens-Before-Konsistenz}
 Eine mit einem Programm mit Locks kompatible Ausführung $(J,P,w)$ ist happens-before-konsistent wenn es eine partielle Ordnung $\geq$ auf $J$ gibt, so dass:
