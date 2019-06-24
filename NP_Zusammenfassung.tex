@@ -566,7 +566,7 @@ Eine mit einem Programm kompatible Ausführung $(J,P,w)$ ist \textit{sequentiell
 \end{itemize}
 
 \section{Schwache Konsistenz}
-Hier wird es unintuitiv. Mit schwacher Konsistenz müssen Leseoperationen sich nun nicht mehr auf eine Schreiboperation in der Vergangenheit beziehen. Diese Schreiboperation darf sich jedoch nicht in der Zukunft befinden! Mit anderen Worten: Man darf nicht aus der Zukunft lesen aber beliebig aus der Vergangenheit. Das ermöglicht z.B. das Lesen längst veralteter Werte. Die totale Ordnung der Operationen wird somit partiell und entspricht noch den einzelnen Programmabläufen (Ein Statement kommt immernoch vor dem darunter stehendem Statement im Programm). Das Ergebnis des Programms lässt sich allerdings daran nicht mehr eindeutig erklären.
+Hier wird es unintuitiv. Mit schwacher Konsistenz müssen Leseoperationen sich nun nicht mehr auf eine Schreiboperation in der Vergangenheit beziehen (Out-Of-Thin-Air). Diese Schreiboperation darf sich jedoch nicht in der Zukunft befinden! Mit anderen Worten: Man darf nicht aus der Zukunft lesen aber beliebig aus der Vergangenheit, solange es einen Pfad gibt bei dem der Wert nicht zwischendrinn überschrieben wird. Das ermöglicht z.B. das Lesen längst veralteter Werte. Die totale Ordnung der Operationen wird somit partiell und entspricht noch den einzelnen Programmabläufen (Ein Statement kommt immernoch vor dem darunter stehendem Statement im Programm). Das Ergebnis des Programms lässt sich allerdings daran nicht mehr eindeutig erklären.
 
 \begin{figure}[htb]
 	
@@ -582,6 +582,8 @@ Hier wird es unintuitiv. Mit schwacher Konsistenz müssen Leseoperationen sich n
 		\caption{Diagramm}
 	\end{minipage}
 \end{figure}
+
+Warum gilt hier $(number?0)_8$? Man nimmt von $(number!0)_2$ z.B. den rechten Pfad, da hier nicht $number$ zwischendrinn überschrieben wird.
 
 \paragraph{Schwache Konsistenz}
 Eine mit einem anderen Programm kompatible Ausführung $(J,P,w)$ ist schwach konsistent, wenn es eine 
