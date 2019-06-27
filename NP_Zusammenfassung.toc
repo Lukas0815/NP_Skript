@@ -65,7 +65,7 @@
 \contentsline {paragraph}{Intuition-Regel}{16}
 \contentsline {paragraph}{Schwache Konsistenz}{17}
 \contentsline {section}{\numberline {4.4}Schwache Konsistenz mit Fences}{17}
-\contentsline {paragraph}{Schwache Konsistenz mit Fences}{17}
+\contentsline {paragraph}{Schwache Konsistenz mit Fences}{18}
 \contentsline {section}{\numberline {4.5}Happens-Before-Konsistenz}{18}
 \contentsline {paragraph}{Happens-Before-Konsistenz}{18}
-\contentsline {paragraph}{Intuition}{18}
+\contentsline {paragraph}{Intuition}{19}

@@ -602,15 +602,29 @@ eine partielle Ordnung $\leq$ auf $J$ gibt, so dass:
 \subsubsection*{Out-Of-Thin-Air}
 Mit schwacher Konsistenz kann man jegliche zufällige Werte lesen, die nirgends irgendwo geschrieben werden. Allerdings ist das nicht an jeder Stelle möglich, denn dieser Wert muss sich zyklisch begründen lassen. Wenn ein Programm einen zufälligen Wert ließt, muss es irgendwo später diesen auch schreiben und sich auf ein anderes Programm beziehen, welches diesen auch ließt und danach schreibt. Dieses Schreiben muss sich dann auf das Lesen des ersten Programms beziehen. Somit haben sich die Programme untereinander begründet obwohl der Wert im eigentlich Programm nie vorgekommen ist.\\
 
-\textcolor{red}{TODO: Graph einfügen}\\
+\begin{center}
+	\includegraphics[scale=0.04]{outOfThinAir.jpg}
+\end{center}
 
 \section{Schwache Konsistenz mit Fences}
 Fences sind ein Low-Level-Konzept um Probleme mit veralteten Daten in Caches besser in den Griff zu bekommen. Werte, die nach einem Fence geschrieben werden können nicht vor dem Fence gelesen werden. Wenn ein Wert nach einer Fence-Anweisung geschrieben wird, sehen wir alles, was davor geschrieben wurde. Dieser Satz im Skript möchte sagen, dass ab diesem Zeipunkt die aktuellen Werte (auch aller anderen Variablen dieses Programms) wirklich gelten. Die folgenden zwei Beispiele sollen die Funktion verdeutlichen.\\
 
-\textcolor{red}{TODO: Graph einfügen}\\
+\begin{figure}[htb]
+	\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\includegraphics[scale=0.03]{FenceCase1.jpg}
+		\caption{x liest vor Fence}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\includegraphics[scale=0.03]{FenceCase2.jpg}
+		\caption{x liest nach Fence}
+	\end{minipage}
+\end{figure}
+
 Man sieht, dass in dem rechten Teilprogramm noch nicht aus dem neuen Wert von x nach dem ``fence'' gelesen wird. Solange das nicht passiert, darf y also auch auf einen veralteten Wert, nämlich den ersten Wert zugreifen (Unter der Annahme von schwacher Konsistenz)\\
 
-\textcolor{red}{TODO: Graph einfügen}\\
 Angenommen das x im rechten Programm ließt den Wert nach dem Fence. Würde davor gelesen werden könnten diese Operationen sich noch auf Werte vor dem Fence beziehen. Das y steht in der partiellen Ordnung aber nun nach dem x (rechte Seite). Dementsprechend kann y nun nur noch den aktuellsten Wert in dem linken Teilprogramm lesen. Veraltete Werte sind jetzt nicht mehr möglich!
 
 \begin{figure}[htb]
@@ -665,7 +679,25 @@ Eine mit einem Programm mit Locks kompatible Ausführung $(J,P,w)$ ist happens-b
 
 \paragraph{Intuition}
 Das Locken erweitert die Ordnung und macht sie total. Sie dafür die folgenden Graphen:
-\textcolor{red}{Graphen einfügen}
+
+\begin{figure}[htb]
+	
+	\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\includegraphics[scale=0.03]{noLocks.jpg}
+		\caption{Graph ohne locks}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\includegraphics[scale=0.03]{lockProblem}
+		\caption{Graph mit locks und Problem}
+	\end{minipage}
+\end{figure}
+
+Man beachte, wenn man eine lock-unlock-Reihenfolge festgelegt hat - hier mit rotem Pfeil dargestellt - werden die zwei partiellen Programmabläufe jetzt zu einer neuen natürlichen Programmordnung. Deshalb kann in Figur 4.10 nicht 0 in number eingelesen werden, da jetzt "number!42" in der eigenen natürlichen Programmordnung steht und somit ein bereits aktualisierter Wert gelesen wird!
+
+
 
 \end{document}
 
