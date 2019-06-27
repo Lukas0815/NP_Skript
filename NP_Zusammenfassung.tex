@@ -568,6 +568,8 @@ Eine mit einem Programm kompatible Ausführung $(J,P,w)$ ist \textit{sequentiell
 \section{Schwache Konsistenz}
 Hier wird es unintuitiv. Mit schwacher Konsistenz müssen Leseoperationen sich nun nicht mehr auf eine Schreiboperation in der Vergangenheit beziehen (Out-Of-Thin-Air). Diese Schreiboperation darf sich jedoch nicht in der Zukunft befinden! Mit anderen Worten: Man darf nicht aus der Zukunft lesen aber beliebig aus der Vergangenheit, solange es einen Pfad gibt bei dem der Wert nicht zwischendrinn überschrieben wird. Das ermöglicht z.B. das Lesen längst veralteter Werte. Die totale Ordnung der Operationen wird somit partiell und entspricht noch den einzelnen Programmabläufen (Ein Statement kommt immernoch vor dem darunter stehendem Statement im Programm). Das Ergebnis des Programms lässt sich allerdings daran nicht mehr eindeutig erklären.
 
+\paragraph{Intuition-Regel}: Solange man nicht in der eigenen natürlichen Programm-Ordnung aus der Zukunft liest, kann gelesen werden was man will. Heißt also aus anderen partiellen Pfaden kann man quasi immer lesen wo man möchte. In der eigenen natürlichen Programmordnung müsste man den aktuellen Wert lesen!
+
 \begin{figure}[htb]
 	
 	\begin{minipage}[t]{0.3\linewidth}
@@ -597,8 +599,19 @@ eine partielle Ordnung $\leq$ auf $J$ gibt, so dass:
 	\end{itemize}
 \end{itemize}
 
+\subsubsection*{Out-Of-Thin-Air}
+Mit schwacher Konsistenz kann man jegliche zufällige Werte lesen, die nirgends irgendwo geschrieben werden. Allerdings ist das nicht an jeder Stelle möglich, denn dieser Wert muss sich zyklisch begründen lassen. Wenn ein Programm einen zufälligen Wert ließt, muss es irgendwo später diesen auch schreiben und sich auf ein anderes Programm beziehen, welches diesen auch ließt und danach schreibt. Dieses Schreiben muss sich dann auf das Lesen des ersten Programms beziehen. Somit haben sich die Programme untereinander begründet obwohl der Wert im eigentlich Programm nie vorgekommen ist.\\
+
+\textcolor{red}{TODO: Graph einfügen}\\
+
 \section{Schwache Konsistenz mit Fences}
-Fences sind ein Low-Level-Konzept um Probleme mit veralteten Daten in Caches besser in den Griff zu bekommen. Werte, die nach einem Fence geschrieben werden können nicht vor dem Fence gelesen werden. Ein Fence könnte man sich vorstellen wie eine Zeitmauer, welche die Zeitmaschine der Lesezugriffe nicht durchdringen kann und sie davon abhält Werte hinter ihr zu lesen. (Der Begriff Fence, also "Zaun" ist da vielleicht ein wenig untertrieben. Zeitmauern hören sich wesentlich besser an... Wo bleibt hier sonst die Epik?) Wenn ein Wert nach einer Fence-Anweisung geschrieben wird, sehen wir alles, was davor geschrieben wurde. Dieser Satz im Skript möchte sagen, dass ab diesem Zeipunkt die aktuellen Werte wirklich gelten. Sagen wir eine Variable x wird zuerst auf 69, dann auf 1337 gesetzt. Ohne Fence könnte man in einer folgenden Leseoperation immernoch die 69 aus x lesen. Setzt man aber nach dem Schreiben von 1337 ein Fence gilt jetzt unbedingt x=1337, da die 69 nicht mehr gesehen werden kann. (Daher vielleicht der "Zaun" und keine Mauer, da man durch den Zaun die letzte Zuweisung sieht, nicht jedoch Zuweisungen noch weiter dahinter...) 
+Fences sind ein Low-Level-Konzept um Probleme mit veralteten Daten in Caches besser in den Griff zu bekommen. Werte, die nach einem Fence geschrieben werden können nicht vor dem Fence gelesen werden. Wenn ein Wert nach einer Fence-Anweisung geschrieben wird, sehen wir alles, was davor geschrieben wurde. Dieser Satz im Skript möchte sagen, dass ab diesem Zeipunkt die aktuellen Werte (auch aller anderen Variablen dieses Programms) wirklich gelten. Die folgenden zwei Beispiele sollen die Funktion verdeutlichen.\\
+
+\textcolor{red}{TODO: Graph einfügen}\\
+Man sieht, dass in dem rechten Teilprogramm noch nicht aus dem neuen Wert von x nach dem ``fence'' gelesen wird. Solange das nicht passiert, darf y also auch auf einen veralteten Wert, nämlich den ersten Wert zugreifen (Unter der Annahme von schwacher Konsistenz)\\
+
+\textcolor{red}{TODO: Graph einfügen}\\
+Angenommen das x im rechten Programm ließt den Wert nach dem Fence. Würde davor gelesen werden könnten diese Operationen sich noch auf Werte vor dem Fence beziehen. Das y steht in der partiellen Ordnung aber nun nach dem x (rechte Seite). Dementsprechend kann y nun nur noch den aktuellsten Wert in dem linken Teilprogramm lesen. Veraltete Werte sind jetzt nicht mehr möglich!
 
 \begin{figure}[htb]
 	
@@ -649,6 +662,10 @@ Eine mit einem Programm mit Locks kompatible Ausführung $(J,P,w)$ ist happens-b
 		\item $unlock(l)_2 \leq lock(l)_1$
 	\end{itemize}
 \end{itemize}
+
+\paragraph{Intuition}
+Das Locken erweitert die Ordnung und macht sie total. Sie dafür die folgenden Graphen:
+\textcolor{red}{Graphen einfügen}
 
 \end{document}
 

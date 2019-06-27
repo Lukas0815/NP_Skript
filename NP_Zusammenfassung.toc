@@ -62,8 +62,10 @@
 \contentsline {section}{\numberline {4.2}Sequentielle Konsistenz}{15}
 \contentsline {paragraph}{Sequentielle Konsistenz}{16}
 \contentsline {section}{\numberline {4.3}Schwache Konsistenz}{16}
-\contentsline {paragraph}{Schwache Konsistenz}{16}
+\contentsline {paragraph}{Intuition-Regel}{16}
+\contentsline {paragraph}{Schwache Konsistenz}{17}
 \contentsline {section}{\numberline {4.4}Schwache Konsistenz mit Fences}{17}
 \contentsline {paragraph}{Schwache Konsistenz mit Fences}{17}
-\contentsline {section}{\numberline {4.5}Happens-Before-Konsistenz}{17}
+\contentsline {section}{\numberline {4.5}Happens-Before-Konsistenz}{18}
 \contentsline {paragraph}{Happens-Before-Konsistenz}{18}
+\contentsline {paragraph}{Intuition}{18}
